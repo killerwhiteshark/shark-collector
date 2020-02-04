@@ -1,7 +1,8 @@
 ##########################################################
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Shark
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import FeedingForm
 from django.http import HttpResponse ### ADDED HTTPRESPONSE MODULE FOR ONLY RESPONSES
 # Create your views here.
 
@@ -30,7 +31,20 @@ def sharks_index(request):
 
 def sharks_detail(request, shark_id):
   shark = Shark.objects.get(id=shark_id)
-  return render(request, 'sharks/detail.html', { 'shark': shark })
+  feeding_form = FeedingForm()
+  return render(request, 'sharks/detail.html', { 'shark': shark,'feeding_form': feeding_form })
+
+def add_feeding(request, shark_id):
+  # create the ModelForm using the data in request.POST
+  form = FeedingForm(request.POST)
+  # validate the form
+  if form.is_valid():
+    # don't save the form to the db until it
+    # has the cat_id assigned
+    new_feeding = form.save(commit=False)
+    new_feeding.shark_id = shark_id
+    new_feeding.save()
+  return redirect('detail', shark_id=shark_id)
 
 class SharkCreate(CreateView):
   model = Shark
