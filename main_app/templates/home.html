@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Shark Home</h1>
+<h1>Hello (~~~^~~~)</h1>
+<ul>
+    <li>
+        <a href="{% url 'about'%}">To about Sharks</a>
+    </li>
+    <li>
+        <a href="{% url 'index' %}">List of my Sharks</a>
+    </li>
+</ul>
+
+{% endblock %}
