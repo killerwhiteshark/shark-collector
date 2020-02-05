@@ -50,7 +50,11 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="color: grey">{{ toy.color }}</span> {{ toy.name }}
+              {% if toy.color == "White" or toy.color == "white"%}
+              A <span style="background-color: aqua; color: {{ toy.color }};">{{ toy.color }}</span> {{ toy.name }}
+              {% else %}
+              A <span style="color: {{ toy.color }}">{{ toy.color }}</span> {{ toy.name }}
+              {% endif %}
             </span>
           </div>
           <div class="card-action">
@@ -65,7 +69,6 @@
       <h5>No Toys :(</h5>
     {% endif %}
   </div>
-
   <div class="col s6">
     <h3>Available Toys</h3>
     {% if toys.count %}
@@ -73,8 +76,11 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <!--  {{ toy.color }} -->
-              A <span style="color: grey">{{ toy.color }}</span> {{ toy.name }}
+              {% if toy.color == "White" or toy.color == "white"%}
+              A <span style="background-color: aqua; color: {{ toy.color }};">{{ toy.color }}</span> {{ toy.name }}
+              {% else %}
+              A <span style="color: {{ toy.color }}">{{ toy.color }}</span> {{ toy.name }}
+              {% endif %}
             </span>
           </div>
           <div class="card-action">
