@@ -50,8 +50,11 @@ def add_feeding(request, shark_id):
 
 class SharkCreate(CreateView):
   model = Shark
-  fields = '__all__'
-  success_url = '/sharks/'
+  fields = ['name', 'species', 'description']
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
 
 class SharkUpdate(UpdateView):
   model = Shark
