@@ -14,13 +14,17 @@
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper" id="nav">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;SharkCollector</a></li>
-        </ul>
+        <div style="display: flexbox;">
+          <ul>
+            <li><a href="/" class="left brand-logo">&nbsp;&nbsp;SharkCollector</a></li>
+            {%if user.is_authenticated %}
+            <li style="margin-left: 250px;"><h5>Hello {{ user.username }}!</h5></li>
+            {% endif %}
+          </ul>
+        </div>
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
           {%if user.is_authenticated %}
-          <li><a href="{% url 'about'%}">About</a></li>
           <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
           <li><a href="{% url 'toys_index' %}">View All Toys</a></li>
           <li><a href="{% url 'sharks_create' %}">Add a Shark</a></li>
@@ -28,6 +32,7 @@
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
           
         </ul>
